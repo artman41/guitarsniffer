@@ -1,13 +1,13 @@
 package main
 
 import (
-	"encoding/hex"
+	"bytes"
+	"encoding/json"
 	"fmt"
 
+	"github.com/artman41/guitarsniffer/guitarpacket"
 	"github.com/artman41/guitarsniffer/sniffer"
 )
-
-const XboxHeaderLength = 22
 
 func main() {
 	sniffer, err := sniffer.Start()
@@ -23,37 +23,20 @@ func main() {
 }
 
 func handle_packet(packet sniffer.Packet) {
+	// The packet returned when pressing the Xbox button is 31
+	// bytes long, not 40, meaning that currently we're
+	// ignoring that it exists but the code is there for it
 	if packet.CaptureInfo.Length != 40 {
 		return
 	}
-	createGuitarPacket(packet.Data[XboxHeaderLength:])
-}
-
-func createGuitarPacket(packet []byte) GuitarPacket {
-	fmt.Printf("%d %s\n", len(packet), hex.EncodeToString(packet))
-	upperFrets := Frets{
-		Green: packet[11],
+	guitarPacket := guitarpacket.CreateGuitarPacket(packet.Data[guitarpacket.XboxHeaderLength:])
+	buf := bytes.NewBuffer(nil)
+	enc := json.NewEncoder(buf)
+	enc.SetIndent("", "    ")
+	enc.SetEscapeHTML(false)
+	err := enc.Encode(guitarPacket)
+	if err != nil {
+		return
 	}
-	lowerFrets := Frets{}
-	return GuitarPacket{
-		UpperFrets: upperFrets,
-		LowerFrets: lowerFrets,
-	}
-}
-
-getFrets(fretBitMask byte)
-
-type Frets struct {
-	Green, Red, Yellow, Blue, Orange byte
-}
-
-type GuitarPacket struct {
-	UpperFrets, LowerFrets Frets
-	Dpad                   byte
-	Slider                 byte
-	MenuButton             bool
-	OptionsButton          bool
-	XboxButton             bool
-	Whammy                 byte
-	Tilt                   byte
+	fmt.Println(string(buf.Bytes()))
 }
