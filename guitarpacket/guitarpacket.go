@@ -1,10 +1,5 @@
 package guitarpacket
 
-import (
-	"encoding/hex"
-	"fmt"
-)
-
 const XboxHeaderLength = 22
 
 // Frets
@@ -47,19 +42,22 @@ const (
 // Note: the function assumes that the given packet
 // has already had the XboxHeader removed from it
 func CreateGuitarPacket(packet []byte) GuitarPacket {
-	fmt.Printf("(%d) %s\n", len(packet), hex.EncodeToString(packet))
+	// fmt.Printf("(%d) %s\n", len(packet), hex.EncodeToString(packet))
 	upperFrets := getFrets(packet[PosUpperFret])
 	lowerFrets := getFrets(packet[PosLowerFret])
 	dpad := getDpad(packet[PosDpad])
 	buttons := getButtons(packet[PosButtons])
+	axes := Axes{
+		Slider: packet[PosSlider],
+		Whammy: packet[PosWhammy],
+		Tilt:   packet[PosTilt],
+	}
 	return GuitarPacket{
 		UpperFrets: upperFrets,
 		LowerFrets: lowerFrets,
 		Dpad:       dpad,
-		Slider:     int(packet[PosSlider] / 16),
 		Buttons:    buttons,
-		Whammy:     packet[PosWhammy],
-		Tilt:       packet[PosTilt],
+		Axes:       axes,
 	}
 }
 
@@ -102,11 +100,15 @@ type Dpad struct {
 	Up, Down, Left, Right bool
 }
 
+type Axes struct {
+	Slider byte
+	Whammy byte
+	Tilt   byte
+}
+
 type GuitarPacket struct {
 	UpperFrets, LowerFrets Frets
 	Dpad                   Dpad
-	Slider                 int
 	Buttons                Buttons
-	Whammy                 byte
-	Tilt                   byte
+	Axes                   Axes
 }
