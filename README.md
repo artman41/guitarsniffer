@@ -1,4 +1,4 @@
-# GuitarSniffer
+# GuitarSniffer [![AbstruseCI](https://ci.artman41.xyz/badge/1)](https://ci.artman41.xyz/repo/1)
 
 ## Installation
 
