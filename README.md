@@ -27,7 +27,11 @@
 
 Enjoy yourself!
 
-Currently the console will only output the `CurrentPacket`, but this will change in the future to be a display of all the active outputs in the `CurrentPacket`
+Open the application and a gui will display showing all the currently held buttons & the `CurrentPacket` at the bottom!
+
+![guitarsniffer_gui1](https://mtzibw.dm.files.1drv.com/y4m_A4BHUZe1i5T6Ed04lLwrZODZsWNeOiOvwtgJ7NGv0vnoj1_b1OpXaWm6oo1euP_f0j11akzTp_vOXBFeIwOLvUcbPvQbNl2mASYx9FUxnIbaPmSOINshi6bYMJYMzdNSw8EI-pFLtwBCUWHYOQ5AoNhN9FKA9MOnkH68coXkCeywHUOUeuuD_XmRyFwIZFusxCHC5HZCpxd8WIZ6Wc5oQ)
+
+![guitarsniffer_gui2](https://mtbj4w.dm.files.1drv.com/y4mdlrx-ReJqVoenZiRPXsKRPlQSKnBqdWak7JyMGhMC3YEwazUcvKNPSSYCrwdLrgrnrvMIf5fnUzYBIvGjtJz1UEVFymr5Lu6uVzKz0iNdkP4_hnqLJba2htJwPLd-SH2PjzEANsOeFgTcqFyOZbpvMm6Q94MHdhvwIn3RvGrV1Jn_wuIJ1JVb4CYgCalM-d8j5Crbxf3H9zXFlTGmNnuTA)
 
 ## Development
 
