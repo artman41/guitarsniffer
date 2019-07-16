@@ -9,7 +9,7 @@
 * [USBPCap](https://desowin.org/usbpcap/)
 
 ### Install vJoy
-* [vJoy](http://vjoystick.sourceforge.net/site/index.php/component/weblinks/weblink/13-uncategorised/14-latest-download?Itemid=435&task=weblink.go)
+* [vJoy](https://github.com/jshafer817/vJoy/releases/latest)
 
 ### Configure vJoy
 
