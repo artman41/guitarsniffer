@@ -9,7 +9,12 @@
 * [USBPCap](https://desowin.org/usbpcap/)
 
 ### Install vJoy
+
+#### Windows 10
 * [vJoy](https://github.com/jshafer817/vJoy/releases/latest)
+
+#### Other versions of Windows
+* [vJoy](http://vjoystick.sourceforge.net/site/index.php/component/weblinks/weblink/13-uncategorised/14-latest-download?Itemid=435&task=weblink.go)
 
 ### Configure vJoy
 
