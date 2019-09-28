@@ -1,4 +1,4 @@
-package guitarsniffer
+package sniffer
 
 import (
 	"sync"
@@ -24,14 +24,14 @@ type Packet struct {
 
 // Start attempts to start the sniffer and return a pointer to the struct
 func Start() (*Sniffer, error) {
-	sniffer, err := createSniffer()
+	snifferP, err := createSniffer()
 	if err != nil {
 		return nil, err
 	}
-	sniffer.readBytes = true
-	sniffer.waitGroup.Add(1)
-	go sniffer.beginRead()
-	return sniffer, nil
+	snifferP.readBytes = true
+	snifferP.waitGroup.Add(1)
+	go snifferP.beginRead()
+	return snifferP, nil
 }
 
 // Stop attempts to stop the sniffer
@@ -48,12 +48,12 @@ func createSniffer() (*Sniffer, error) {
 	if err != nil {
 		return nil, err
 	}
-	sniffer := &Sniffer{
+	snifferP := &Sniffer{
 		XboxAdapter: handle,
 		Packets:     make(chan Packet),
 		waitGroup:   &sync.WaitGroup{},
 	}
-	return sniffer, nil
+	return snifferP, nil
 }
 
 func (s *Sniffer) beginRead() {

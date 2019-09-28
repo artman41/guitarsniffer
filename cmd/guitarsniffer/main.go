@@ -8,7 +8,7 @@ import (
 
 	"github.com/artman41/guitarsniffer/guitarjoypad"
 	"github.com/artman41/guitarsniffer/guitarpacket"
-	"github.com/artman41/guitarsniffer/guitarsniffer"
+	"github.com/artman41/guitarsniffer/sniffer"
 	"github.com/go-gl/gl/v2.1/gl"
 	"github.com/go-gl/glfw/v3.1/glfw"
 )
@@ -92,14 +92,14 @@ func dataThread(runDataThread *bool) {
 	defer guitarJoypad.Relinquish()
 
 	fmt.Println("Starting Sniffer...")
-	sniffer, err := guitarsniffer.Start()
-	defer sniffer.Stop()
+	snifferP, err := sniffer.Start()
+	defer snifferP.Stop()
 	if err != nil {
 		panic(err)
 	}
 	for *runDataThread {
 		select {
-		case packet := <-sniffer.Packets:
+		case packet := <-snifferP.Packets:
 			handlePacket(&packet)
 		default:
 			continue
@@ -107,7 +107,7 @@ func dataThread(runDataThread *bool) {
 	}
 }
 
-func handlePacket(packet *guitarsniffer.Packet) {
+func handlePacket(packet *sniffer.Packet) {
 	// The packet returned when pressing the Xbox button is 31
 	// bytes long, not 40, meaning that currently we're
 	// ignoring that it exists but the code is there for it

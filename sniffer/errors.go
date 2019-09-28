@@ -1,4 +1,4 @@
-package guitarsniffer
+package sniffer
 
 import "errors"
 
